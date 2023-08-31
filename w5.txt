@@ -1,0 +1,53 @@
+--drop database if exists tinyedu; (neu muon xoa dtb da co)
+--\d clazz (xem bang clazz)
+--\dt (xem tham chieu)
+--select * from student; (lay all thong tin trong bang)
+
+create database tinyedu;
+\c tinyedu (connect to tinyedu)
+
+create table student(
+	student_id char(8) not null,
+	firstname varchar(10),
+	clazz_id char(8),
+	constraint pk_std primary key (student_id)
+);
+
+create table clazz(
+	clazz_id char(8) not null,
+	name varchar(20),
+	lecturer_id char(5),
+	monitor_id char(8),
+	primary key (clazz_id),
+	constraint fk_clazz2std foreign key (monitor_id) 
+		references student (student_id)
+);
+
+alter table student drop constraint fk_std2clazz;
+alter table student add constraint fk_std2clazz foreign key
+	(clazz_id) references clazz(clazz_id)
+ON DELETE SET NULL ON UPDATE CASCADE;
+
+(xoa va update)
+insert into student(student_id, firstname)
+	values('20215138','Thao');
+insert into student(student_id, firstname)
+	values('20215152','Trang');
+
+select * from student; 
+
+insert into clazz(clazz_id, name)
+	values('C001','KHMT 01 K66');
+insert into clazz(clazz_id, name)
+	values('C002','KHMT 02 K66');
+insert into clazz(clazz_id, name)
+	values('C003','KHMT 03 K66');
+
+update student set clazz_id = 'C001' where student_id = '20215138';
+update student set clazz_id = 'C002' where student_id = '20215152';
+update clazz set monitor_id = '20215138' where clazz_id = 'C001';
+
+== xoa 1 lop:
+delete from clazz where clazz_id = 'C003';
+delete from clazz where clazz_id = 'C002' ;
+ update clazz set clazz_id = 'C003' where clazz_id = 'C004'

@@ -1,0 +1,5 @@
+cd "C:\Program Files\PostgreSQL\15\bin"
+psql -h localhost postgres postgres
+postgres=# CREATE DATABASE tinyedu;
+postgres-# CREATE SCHEMA store;
+

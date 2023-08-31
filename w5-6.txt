@@ -1,0 +1,15 @@
+cd "C:\Program Files\PostgreSQL\15\bin"
+psql -h localhost -f "C:\Users\DELL\Downloads\EducationDB_v2_withCreateDB.sql" postgres postgres
+psql -h localhost edudb_v2 postgres
+-----------Hien thi ma so sinh vien cua hai sinh vien co trong bang ------
+select student_id from student where student_id='20170001'or student_if='20150009';
+---------Hien thi thong tin lop truong-----
+select clazz.clazz_id,name,monitor_id,student_id,gender
+from clazz, student
+where class.monitor_id=student.student_id;
+
+------   --------
+select clazz_id, name, lecturer_id from clazz where lecturer_id is not null order by name;
+
+------ -------
+select clazz_id, name, lecturer_id from clazz where lecturer_id is not null;
